@@ -25,6 +25,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    if (project.android.hasProperty('namespace') ||
+            getGradle().getGradleVersion().substring(0, 1).toInteger() >= 8) {
+        namespace 'com.example.imagegallerysaver'
+    }
     compileSdkVersion 30
 
     sourceSets {
@@ -33,6 +37,9 @@ android {
     defaultConfig {
         minSdkVersion 16
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
     lintOptions {
         disable 'InvalidPackage'
